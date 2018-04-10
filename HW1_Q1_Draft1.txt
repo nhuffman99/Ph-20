@@ -1,0 +1,27 @@
+import math
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+
+def trigseqs(fx,fy,Ax,Ay,phi,dt,N):
+    timesteps=list(range(0,N+1,dt)) #defines timesteps
+    #initializing X,Y,Z lists 
+    X=[0]*(N+1)
+    Y=[0]*(N+1)
+    Z=[0]*(N+1)
+    #for each timestep, write value of X,Y,Z
+    for i in range(len(timesteps)):
+        X[i]=Ax*math.cos(2*math.pi*fx*timesteps[i])
+        Y[i]=Ay*math.cos(2*math.pi*fy*timesteps[i]+phi)
+        Z[i]=X[i]+Y[i]
+    print(X)
+    print(Y)
+    print(Z)
+    #print('{0:2d} {1:3d} {2:4d}'.format(X,Y,Z)) #trying to print a table to export
+    f = open('trigseqs.txt', 'w')
+    f.writelines(list(map(str,X)))
+    f.close()
+    f1=open('trigseqs.txt', 'r')
+    f1.read()
+    
+trigseqs(1,1,1,2,math.pi,1,10)
